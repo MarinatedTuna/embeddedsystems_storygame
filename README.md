@@ -1,0 +1,15 @@
+# CS164 Project 3
+
+## Overview
+This custom project I made is a dating simulator game. The user traverses through the story primarily by constantly toggling A0 on and off to simulate pressing a button to go through dialogue as opposed to simply holding it. Sometimes, the user can choose what to say to the romantic interests and if enough wrong choices are picked, the story will end prematurely and the user will have to start over. The total read time if played all the way to the end in a single playthrough is between 20-30 minutes. The total read time when all possible dialogue options and branching storylines are chosen is between 45 minutes to 1 hour.
+
+There are four state machines in this project. The first state machine checks how many lives the user has. The second state machine and third state machine hold the dialogue of the entire story. Lastly, the fourth state machine constantly checks if the user wants to read another chapter.
+
+## First state machine
+This state machine initially sets the number of lives the user has to 3. If the user picks a wrong option while reading the story, the number of lives is decremented by 1. If the user hits 0 lives, this state machine will lead them to a game over screen and will stop the flow of the game by bringing it back to the first dialogue of the first chapter once the user chooses to continue. The number of lives are output on B0, B1, and B2 respectively. 3 lives are represented by B0, B1, and B2 being on. 2 lives are represented by B0 and B1 being on. 1 life is represented by only having B0 on. And finally, having 0 lives is represented by having B0, B1, and B2 turned off.
+
+## Second and third state machine
+These are the main state machines that hold all the dialogue in the story. Every time the user turns on and turns off A0, the user is able to advance to the next piece of dialogue. However, during choices where the user must press either A1 or A2 before turning it off or on the last choice, A4, A5, A6, or A7, the dialogue will not move forward until the user presses one of those buttons. After that, the story progresses normally when the user presses A0 and turns it on and off. The chapter numbers are also represented by these state machines. If the user is on chapter 1, B3 will light up. On chapter 2, B3 and B4 will light up. On chapter 3, B3-B5 will light up. On chapter 4, B3-B6 will light up. On chapter 5, B3-B7 will light up.
+
+## Fourth state machine
+This state machine constantly checks if the user wants to pick a chapter at any given time throughout the story. If the user presses A3 at any point while the game is running, the user is presented with 4 options in order to start the story at a particular chapter. If the user presses A4, then they go to chapter 1, A5 is for chapter 2, A6 is for chapter 3, and A7 is for chapter 4. After a user picks a chapter, the user is prompted to disable all A inputs and then is asked to turn on A0 in order to display the first dialogue of the chapter that was chosen.
